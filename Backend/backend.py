@@ -3,6 +3,7 @@ from flask import Flask
 from flask import jsonify
 from flask import request
 from flask import make_response
+from flask_cors import CORS, cross_origin
 from sql import createConnection
 from sql import executeReadQuery
 from sql import executeQuery
@@ -14,6 +15,7 @@ import datetime
 #Initial setup for Flask
 app = Flask(__name__) #sets up the application... (somehow)
 app.config['DEBUG'] = True
+CORS(app) #Cross Origin Resource Sharing
 
 #Initializing MySQL/AWS database connection for APIs
 myCreds = Creds()

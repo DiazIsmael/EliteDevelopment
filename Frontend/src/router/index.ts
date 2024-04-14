@@ -10,8 +10,9 @@ import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
 import SettingsView from '@/views/Pages/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import TablesView from '@/views/TablesView.vue'
-import AlertsView from '@/views/UiElements/AlertsView.vue'
-import ButtonsView from '@/views/UiElements/ButtonsView.vue'
+import AlertsView from '@/views/UIElements/AlertsView.vue'
+import ButtonsView from '@/views/UIElements/ButtonsView.vue'
+import EmployeesView from '@/views/EmployeesView.vue'
 
 const routes = [
   {
@@ -28,6 +29,14 @@ const routes = [
     component: CalendarView,
     meta: {
       title: 'Calendar'
+    }
+  },
+  {
+    path: '/employees',
+    name: 'employees',
+    component: EmployeesView,
+    meta: {
+      title: 'Employees'
     }
   },
   {
@@ -121,7 +130,7 @@ const router = createRouter({
 })
 
 router.beforeEach((to, from, next) => {
-  document.title = `Vue.js ${to.meta.title} | TailAdmin - Vue.js Tailwind CSS Dashboard Template`
+  document.title = `${to.meta.title} | JADiaz Dashboard`
   next()
 })
 

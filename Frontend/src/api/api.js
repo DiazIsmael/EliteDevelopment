@@ -1,10 +1,11 @@
+/* eslint-disable no-useless-catch */
 // This file contains all API calls to the API endpoints
 // import axios to make API calls
 import axios from "axios";
 
 // Create HTTP client with the base URL, and specify that the data sent in the request body is JSON
 const apiClient = axios.create({
-  baseURL: import.meta.env.VITE_ROOT_API,
+  baseURL: "http://localhost:5000",
   headers: {
     "Content-Type": "application/json",
   },
@@ -31,7 +32,9 @@ function getErrorMessageFromResponseBody(string) {
     if (json.errors) {
       errorString = json.errors[0].msg;
     }
-  } catch (parseOrAccessError) {}
+  } catch (parseOrAccessError) {
+    console.error(parseOrAccessError);
+  }
 
   return errorString;
 }
@@ -69,14 +72,14 @@ export function logoutUser() {
 export async function getOrgName() {
   const response = await apiClient.get(`/org`);
   return response.data;
-}
+};
 
 // --Events related API calls-- //
 
 // API call to get all events for org
-export const getEvents = async () => {
+export const getEmployees = async () => {
   try {
-    const response = await apiClient.get("/events/");
+    const response = await apiClient.get("/api/employee/all");
     return response.data;
   } catch (error) {
     throw error;
