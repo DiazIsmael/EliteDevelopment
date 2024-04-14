@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
-import EmployeesTable from '@/components/Tables/EmployeesTable.vue'
+import ClientsTable from '@/components/Tables/ClientsTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Registered Employees')
+const pageTitle = ref('All Registered Clients')
 </script>
 
 <template>
@@ -14,7 +14,7 @@ const pageTitle = ref('All Registered Employees')
     <!-- Breadcrumb End -->
 
     <div class="flex flex-col gap-10">
-      <EmployeesTable />
+      <ClientsTable />
     </div>
   </DefaultLayout>
 </template>

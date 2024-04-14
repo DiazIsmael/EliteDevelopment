@@ -4,23 +4,26 @@ import SigninView from '@/views/Authentication/SigninView.vue'
 import SignupView from '@/views/Authentication/SignupView.vue'
 import CalendarView from '@/views/CalendarView.vue'
 import BasicChartView from '@/views/Charts/BasicChartView.vue'
-import ECommerceView from '@/views/Dashboard/ECommerceView.vue'
+import GlanceView from '@/views/Dashboard/GlanceView.vue'
 import FormElementsView from '@/views/Forms/FormElementsView.vue'
 import FormLayoutView from '@/views/Forms/FormLayoutView.vue'
-import SettingsView from '@/views/Pages/SettingsView.vue'
+import SettingsView from '@/views/SettingsView.vue'
 import ProfileView from '@/views/ProfileView.vue'
 import TablesView from '@/views/TablesView.vue'
 import AlertsView from '@/views/UIElements/AlertsView.vue'
 import ButtonsView from '@/views/UIElements/ButtonsView.vue'
 import EmployeesView from '@/views/EmployeesView.vue'
+import ClientsView from '@/views/ClientsView.vue'
+import InvoicesView from '@/views/Invoices/InvoicesView.vue'
+import WorkOrdersView from '@/views/Invoices/WorkOrdersView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'eCommerce',
-    component: ECommerceView,
+    name: 'glanceView',
+    component: GlanceView,
     meta: {
-      title: 'eCommerce Dashboard'
+      title: 'Dashboard'
     }
   },
   {
@@ -37,6 +40,30 @@ const routes = [
     component: EmployeesView,
     meta: {
       title: 'Employees'
+    }
+  },
+  {
+    path: '/clients',
+    name: 'clients',
+    component: ClientsView,
+    meta: {
+      title: 'Clients'
+    }
+  },
+  {
+    path: '/workorders',
+    name: 'workorders',
+    component: WorkOrdersView,
+    meta: {
+      title: 'Work Orders'
+    }
+  },
+  {
+    path: '/invoices',
+    name: 'invoices',
+    component: InvoicesView,
+    meta: {
+      title: 'Invoices'
     }
   },
   {
@@ -72,7 +99,7 @@ const routes = [
     }
   },
   {
-    path: '/pages/settings',
+    path: '/settings',
     name: 'settings',
     component: SettingsView,
     meta: {

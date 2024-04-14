@@ -74,9 +74,9 @@ export async function getOrgName() {
   return response.data;
 };
 
-// --Events related API calls-- //
+// -- Employees related API calls-- //
 
-// API call to get all events for org
+// API call to get all Employees
 export const getEmployees = async () => {
   try {
     const response = await apiClient.get("/api/employee/all");
@@ -85,6 +85,154 @@ export const getEmployees = async () => {
     throw error;
   }
 };
+
+// --Clients related API calls-- //
+
+// API call to get all Clients
+export const getClients = async () => {
+  try {
+    const response = await apiClient.get("/api/client/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to GET single client by ID
+export const getClientById = async (id) => {
+  try {
+    const response = await apiClient.get(`/clients/id/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to GET entries based on search query
+export const searchClients = async (query) => {
+  try {
+    let params = {};
+    if (query.searchBy === "name") {
+      params.searchBy = query.searchBy;
+      params.firstName = query.firstName || "";
+      params.lastName = query.lastName || "";
+    } else if (query.searchBy === "number") {
+      params.searchBy = query.searchBy;
+      params.phoneNumber = query.phoneNumber || "";
+    }
+    const response = await apiClient.get("/clients/search", {
+      params: params,
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to POST new client
+export const createClient = async (newClient) => {
+  try {
+    const response = await apiClient.post("/clients", newClient);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to PUT update client
+export const updateClient = async (id, updatedClient) => {
+  try {
+    const response = await apiClient.put(
+      `/clients/update/${id}`,
+      updatedClient
+    );
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to delete client
+export const deleteClientbyId = async (id) => {
+  try {
+    const response = await apiClient.delete(`/clients/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to get events for dashboard
+export const getClientsByZipCode = async () => {
+  try {
+    const response = await apiClient.get("/clients/byzip");
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// --Invoices related API calls-- //
+
+// API call to get all Invoices
+export const getInvoices = async () => {
+  try {
+    const response = await apiClient.get("/api/invoice/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// --Work Order related API calls-- //
+
+// API call to get all Invoices
+export const getWorkOrders = async () => {
+  try {
+    const response = await apiClient.get("/api/workorder/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// --Uploads related API calls-- //
+
+// API call to GET the image path for a client by their imageID
+export const getClientImagePath = async (imageID) => {
+  try {
+    const response = await apiClient.get(`/uploads/${imageID}`);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to POST new image for a client by passing clientID and imageFile
+export const uploadImage = async (formData) => {
+  try {
+    const response = await apiClient.post(`/uploads/upload`, formData, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to DELETE image path for a client by passing clientID and imageFile
+export const deleteImage = async (clientID) => {
+  try {
+    const response = await apiClient.delete(`/uploads/delete/${clientID}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// -- Events related API calls-- //
 
 // API call to GET single event by ID
 export const getEventById = async (id) => {
@@ -231,128 +379,6 @@ export const getAttendance = async () => {
     return response.data;
   } catch (error) {
     throw error;
-  }
-};
-
-// --Uploads related API calls-- //
-
-// API call to GET the image path for a client by their imageID
-export const getClientImagePath = async (imageID) => {
-  try {
-    const response = await apiClient.get(`/uploads/${imageID}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to POST new image for a client by passing clientID and imageFile
-export const uploadImage = async (formData) => {
-  try {
-    const response = await apiClient.post(`/uploads/upload`, formData, {
-      headers: {
-        'Content-Type': 'multipart/form-data',
-      },
-    });
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to DELETE image path for a client by passing clientID and imageFile
-export const deleteImage = async (clientID) => {
-  try {
-    const response = await apiClient.delete(`/uploads/delete/${clientID}`);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// --Clients related API calls-- //
-
-// API call to GET all clients for org
-export const getClients = async () => {
-  try {
-    const response = await apiClient.get("clients");
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to GET single client by ID
-export const getClientById = async (id) => {
-  try {
-    const response = await apiClient.get(`/clients/id/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to GET entries based on search query
-export const searchClients = async (query) => {
-  try {
-    let params = {};
-    if (query.searchBy === "name") {
-      params.searchBy = query.searchBy;
-      params.firstName = query.firstName || "";
-      params.lastName = query.lastName || "";
-    } else if (query.searchBy === "number") {
-      params.searchBy = query.searchBy;
-      params.phoneNumber = query.phoneNumber || "";
-    }
-    const response = await apiClient.get("/clients/search", {
-      params: params,
-    });
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to POST new client
-export const createClient = async (newClient) => {
-  try {
-    const response = await apiClient.post("/clients", newClient);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to PUT update client
-export const updateClient = async (id, updatedClient) => {
-  try {
-    const response = await apiClient.put(
-      `/clients/update/${id}`,
-      updatedClient
-    );
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to delete client
-export const deleteClientbyId = async (id) => {
-  try {
-    const response = await apiClient.delete(`/clients/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to get events for dashboard
-export const getClientsByZipCode = async () => {
-  try {
-    const response = await apiClient.get("/clients/byzip");
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
   }
 };
 

@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { useSidebarStore } from '@/stores/sidebar'
 import DarkModeSwitcher from './DarkModeSwitcher.vue'
-import DropdownMessage from './DropdownMessage.vue'
 import DropdownNotification from './DropdownNotification.vue'
 import DropdownUser from './DropdownUser.vue'
 
@@ -53,10 +52,12 @@ const { isSidebarOpen, toggleSidebar } = useSidebarStore()
         </button>
         <!-- Hamburger Toggle BTN -->
         <router-link class="block flex-shrink-0 lg:hidden" to="/">
-          <img src="@/assets/images/logo/logo-icon.svg" alt="Logo" />
+          <img class="size-16" src="@/assets/images/JAD Icon.png" alt="Logo" />
         </router-link>
       </div>
       <div class="hidden sm:block">
+        <!-- Search Bar Temporarily Removed Until Further Development -->
+        <!--
         <form action="https://formbold.com/s/unique_form_id" method="POST">
           <div class="relative">
             <button class="absolute top-1/2 left-0 -translate-y-1/2">
@@ -89,7 +90,8 @@ const { isSidebarOpen, toggleSidebar } = useSidebarStore()
               class="w-full xl:w-125 bg-transparent pr-4 pl-9 focus:outline-none"
             />
           </div>
-        </form>
+        </form> 
+        -->
       </div>
 
       <div class="flex items-center gap-3 2xsm:gap-7">
@@ -103,10 +105,6 @@ const { isSidebarOpen, toggleSidebar } = useSidebarStore()
           <!-- Notification Menu Area -->
           <DropdownNotification />
           <!-- Notification Menu Area -->
-
-          <!-- Chat Notification Area -->
-          <DropdownMessage />
-          <!-- Chat Notification Area -->
         </ul>
 
         <!-- User Area -->

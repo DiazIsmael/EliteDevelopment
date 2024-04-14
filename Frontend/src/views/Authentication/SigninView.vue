@@ -15,7 +15,7 @@ const pageTitle = ref('Sign In')
     <BreadcrumbDefault :pageTitle="pageTitle" />
     <!-- Breadcrumb End -->
 
-    <DefaultAuthCard subtitle="Start for free" title="Sign In to TailAdmin">
+    <DefaultAuthCard subtitle="Staff & Client Dashboard Portal" title="Sign In to JADiaz Quality Cleaning">
       <form>
         <InputGroup label="Email" type="email" placeholder="Enter your email">
           <svg
