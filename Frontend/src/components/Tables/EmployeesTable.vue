@@ -51,7 +51,7 @@ onMounted(loadEmployees)
       </div>
 
       <div
-        v-for="employee in employees"
+        v-for="(employee,key) in employees"
         :key="employee.EmployeeID"
         :class="`grid grid-cols-3 sm:grid-cols-5 ${key === employees.length - 1 ? '' : 'border-b border-stroke dark:border-strokedark'}`"
       >
