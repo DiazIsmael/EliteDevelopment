@@ -1,5 +1,6 @@
 credentials.py
 *.pyc
 __pycache__/
+__pycache__
 .env
 venv/
