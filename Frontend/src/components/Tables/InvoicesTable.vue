@@ -37,10 +37,10 @@ onMounted(loadInvoices)
         <thead>
           <tr class="bg-gray-2 text-left dark:bg-meta-4">
             <th class="min-w-[220px] py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Invoice Number & Total</th>
-            <th class="min-w-[120px] py-4 px-0 font-medium text-black dark:text-white">ClientID</th>
-            <th class="min-w-[150px] py-4 px-4 font-medium text-black dark:text-white">Invoice Date</th>
-            <th class="min-w-[120px] py-4 px-4 font-medium text-black dark:text-white">Status</th>
-            <th class="py-4 px-4 font-medium text-black dark:text-white">Actions</th>
+            <th class="min-w-[120px] py-4 px-0 text-center font-medium text-black dark:text-white">ClientID</th>
+            <th class="min-w-[150px] py-4 px-4 text-center font-medium text-black dark:text-white">Invoice Date</th>
+            <th class="min-w-[120px] py-4 px-4 text-center font-medium text-black dark:text-white">Status</th>
+            <th class="py-4 px-4 text-center font-medium text-black dark:text-white">Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -49,13 +49,13 @@ onMounted(loadInvoices)
               <h5 class="font-bold text-black dark:text-white">Invoice Number: {{ invoice.InvoiceNumber }}</h5>
               <p class="text-sm text-meta-3">${{ invoice.Total }}</p>
             </td>
-            <td class="py-5 px-4">
+            <td class="text-center py-5 px-4">
               <p class="text-black dark:text-white">{{ invoice.ClientID }}</p>
             </td>
-            <td class="py-5 px-4">
+            <td class="text-center py-5 px-4">
               <p class="text-black dark:text-white">{{ invoice.Date }}</p>
             </td>
-            <td class="py-5 px-4">
+            <td class="text-center py-5 px-4">
               <p v-if="invoice.StatusCode == 3 || invoice.StatusCode == 4" 
                 class="inline-flex rounded-full bg-opacity-10 py-1 px-4 text-sm font-medium"
                 :class="{'bg-warning text-warning': invoice.StatusCode == 4 || invoice.StatusCode == 3}"> Pending/Sent
@@ -69,7 +69,7 @@ onMounted(loadInvoices)
                 :class="{'bg-success text-success': invoice.StatusCode == 1}"> Paid
               </p>
             </td>
-            <td class="py-5 px-4">
+            <td class="items-center py-5 px-4">
               <div class="flex items-center space-x-3.5">
                 <button class="hover:text-primary">
                   <svg

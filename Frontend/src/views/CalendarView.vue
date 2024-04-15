@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import CalendarCard from '@/components/CalendarCard.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('Calender')
+const pageTitle = ref('Calendar')
 </script>
 
 <template>

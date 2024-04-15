@@ -37,7 +37,7 @@ onMounted(loadClients)
     <div class="flex flex-col">
       <!-- Table Header -->
       <div class="grid grid-cols-4 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-8">
-        <div class="p-2.5 xl:p-5">
+        <div class="p-2.5 sm:block xl:p-5">
           <p class="text-sm font-medium uppercase xsm:text-base">Name</p>
         </div>
         <div class="hidden p-2.5 text-center sm:block xl:p-5">
@@ -49,16 +49,16 @@ onMounted(loadClients)
         <div class="hidden p-2.5 text-center sm:block xl:p-5">
           <p class="text-sm font-medium uppercase xsm:text-base">Email</p>
         </div>
-        <div class="hidden p-2.5 text-center sm:block xl:p-5">
+        <div class="p-2.5 text-center sm:block xl:p-5">
           <p class="text-sm font-medium uppercase xsm:text-base">Phone Number</p>
         </div>
-        <div class="col-span-1 flex justify-center items-center">
+        <div class="p-2.5 text-center sm:block xl:p-5">
           <p class="text-sm font-medium uppercase xsm:text-base">Date Added</p>
         </div>
-        <div class="col-span-1 flex justify-center items-center">
+        <div class="hidden p-2.5 text-center sm:block xl:p-5">
           <p class="text-sm font-medium uppercase xsm:text-base">Client Code</p>
         </div>
-        <div class="col-span-1 flex justify-center items-center">
+        <div class="p-2.5 text-center sm:block xl:p-5">
           <p class="text-sm font-medium uppercase xsm:text-base">Status Code</p>
         </div>
       </div>
@@ -88,7 +88,7 @@ onMounted(loadClients)
         <div class="flex items-center justify-center p-2.5 xl:p-5">
           <p class="text-center text-sm font-medium text-black dark:text-white">{{ client.AddedDate || 'N/A' }}</p>
         </div>
-        <div class="flex items-center justify-center p-2.5 xl:p-5">
+        <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
           <p v-if="client.ClientCode == 1" class="text-meta-3">{{ client.ClientCode }}</p>
           <p v-if="client.ClientCode == 2" class="text-meta-6">{{ client.ClientCode }}</p>
           <p v-if="client.ClientCode == 3" class="text-meta-3">{{ client.ClientCode }}</p>

@@ -62,7 +62,7 @@ onMounted(loadEmployees)
           <p v-if="employee.StatusCode == 4" class="font-bold text-meta-1 sm:block">{{ employee.FirstName }} {{ employee.LastName }}</p>        
         </div>
 
-        <div class="hidden items-center justify-center p-2.5 sm:flex xl:p-5">
+        <div class="hidden text-center items-center justify-center p-2.5 sm:flex xl:p-5">
           <p class="text-black dark:text-white">{{ employee.Address || 'N/A' }}</p>
         </div>
 
