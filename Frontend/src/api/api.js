@@ -171,13 +171,24 @@ export const getClientsByZipCode = async () => {
     throw error.response.data;
   }
 };
+// --Service related API calls-- //
 
-// --Invoices related API calls-- //
-
-// API call to get all Invoices
-export const getInvoices = async () => {
+// API call to get all Services
+export const getServices = async () => {
   try {
-    const response = await apiClient.get("/api/invoice/all");
+    const response = await apiClient.get("/api/service/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// --Janitorial Account related API calls-- //
+
+// API call to get all Janitorial Accounts
+export const getJanitorialAccounts = async () => {
+  try {
+    const response = await apiClient.get("/api/janitorialaccount/all");
     return response.data;
   } catch (error) {
     throw error;
@@ -196,7 +207,40 @@ export const getWorkOrders = async () => {
   }
 };
 
-// --Uploads related API calls-- //
+// --Invoices related API calls-- //
+
+// API call to get all Invoices
+export const getInvoices = async () => {
+  try {
+    const response = await apiClient.get("/api/invoice/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// --Incident related API calls-- //
+
+// API call to get all Invoices
+export const getEmployeeIncidents = async () => {
+  try {
+    const response = await apiClient.get("/api/employeeincident/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getServiceIncidents = async () => {
+  try {
+    const response = await apiClient.get("/api/serviceincident/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// --Uploads related API calls (FROM TEMPLATE)-- //
 
 // API call to GET the image path for a client by their imageID
 export const getClientImagePath = async (imageID) => {
@@ -232,160 +276,10 @@ export const deleteImage = async (clientID) => {
   }
 };
 
-// -- Events related API calls-- //
-
-// API call to GET single event by ID
-export const getEventById = async (id) => {
-  try {
-    const response = await apiClient.get(`/events/id/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to GET events based on search query
-export const searchEvents = async (query) => {
-  try {
-    let params = {};
-    if (query.searchBy === "name") {
-      params.searchBy = query.searchBy;
-      params.name = query.name || "";
-    } else if (query.searchBy === "date") {
-      params.searchBy = "date";
-      params.eventDate = query.eventDate || "";
-    }
-    const response = await apiClient.get(`/events/search`, {
-      params: params,
-    });
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to GET events for which a client is signed up
-export const getClientEvents = async (id) => {
-  try {
-    const response = await apiClient.get(`/events/client/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to GET events for which a client is not signed up
-export const getNonClientEvents = async (id) => {
-  try {
-    const response = await apiClient.get(`/events/client/${id}/not-registered`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to GET all attendees for an event
-export const getEventAttendees = async (id) => {
-  try {
-    const response = await apiClient.get(`/events/attendees/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to GET all events for a given service
-export const getEventsByServiceId = async (id) => {
-  try {
-    const response = await apiClient.get(`/events/service/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to POST new event
-export const createEvent = async (eventData) => {
-  try {
-    const response = await apiClient.post("/events/", eventData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to PUT update event
-export const updateEvent = async (id, eventData) => {
-  try {
-    const response = await apiClient.put(`/events/update/${id}`, eventData);
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to PUT add attendee to event
-export const registerAttendee = async (eventId, clientId) => {
-  try {
-    const response = await apiClient.put(
-      `/events/register`,
-      {},
-      {
-        params: {
-          event: eventId,
-          client: clientId,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to PUT remove attendee from event
-export const deregisterAttendee = async (eventId, clientId) => {
-  try {
-    const response = await apiClient.put(
-      `/events/deregister`,
-      {},
-      {
-        params: {
-          event: eventId,
-          client: clientId,
-        },
-      }
-    );
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// API call to DELETE event by ID
-export const deleteEvent = async (id) => {
-  try {
-    const response = await apiClient.delete(`/events/${id}`);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to get events for last two month for dashboard
-export const getAttendance = async () => {
-  try {
-    const response = await apiClient.get("/events/attendance");
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
-// --API calls related to services-- //
+// --API calls related to services (FROM TEMPLATE)-- //
 
 // API call to get all services for org
-export const getServices = async () => {
+export const getService = async () => {
   try {
     const response = await apiClient.get("/services/");
     return response.data;

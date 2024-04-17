@@ -70,7 +70,7 @@ onMounted(loadInvoices)
               </p>
             </td>
             <td class="items-center py-5 px-4">
-              <div class="flex items-center space-x-3.5">
+              <div class="flex justify-center space-x-3.5">
                 <button class="hover:text-primary">
                   <svg
                     class="fill-current"

@@ -12,10 +12,14 @@ import ProfileView from '@/views/ProfileView.vue'
 import TablesView from '@/views/TablesView.vue'
 import AlertsView from '@/views/UIElements/AlertsView.vue'
 import ButtonsView from '@/views/UIElements/ButtonsView.vue'
-import EmployeesView from '@/views/EmployeesView.vue'
-import ClientsView from '@/views/ClientsView.vue'
+import EmployeesView from '@/views/Employees/EmployeesView.vue'
+import ClientsView from '@/views/Clients/ClientsView.vue'
+import ServicesView from '@/views/Services/ServicesView.vue'
+import JanitorialAccountsView from '@/views/JanitorialAccounts/JanitorialAccountsView.vue'
+import WorkOrdersView from '@/views/WorkOrders/WorkOrdersView.vue'
 import InvoicesView from '@/views/Invoices/InvoicesView.vue'
-import WorkOrdersView from '@/views/Invoices/WorkOrdersView.vue'
+import EmployeeIncidentsView from '@/views/Incidents/EmployeeIncidentsView.vue'
+import ServiceIncidentsView from '@/views/Incidents/ServiceIncidentsView.vue'
 
 const routes = [
   {
@@ -51,6 +55,22 @@ const routes = [
     }
   },
   {
+    path: '/services',
+    name: 'services',
+    component: ServicesView,
+    meta: {
+      title: 'Services'
+    }
+  },
+  {
+    path: '/accounts',
+    name: 'accounts',
+    component: JanitorialAccountsView,
+    meta: {
+      title: 'Janitorial Accounts'
+    }
+  },
+  {
     path: '/workorders',
     name: 'workorders',
     component: WorkOrdersView,
@@ -64,6 +84,22 @@ const routes = [
     component: InvoicesView,
     meta: {
       title: 'Invoices'
+    }
+  },
+  {
+    path: '/employeeincidents',
+    name: 'employeeincidents',
+    component: EmployeeIncidentsView,
+    meta: {
+      title: 'Employee Incidents'
+    }
+  },
+  {
+    path: '/serviceincidents',
+    name: 'serviceincidents',
+    component: ServiceIncidentsView,
+    meta: {
+      title: 'Service Incidents'
     }
   },
   {
