@@ -7,8 +7,8 @@ import axios from "axios";
 const apiClient = axios.create({
   baseURL: "http://localhost:5000",
   headers: {
-    "Content-Type": "application/json",
-  },
+    "Content-Type": "application/json"
+  }
 });
 
 // --Login related API calls-- //
@@ -98,6 +98,7 @@ export const getClients = async () => {
   }
 };
 
+// THE REST OF THESE CLIENT ONES WERE INCLUDED IN TEMPLATE, BUT MAY SERVE USEFUL L8R //
 // API call to GET single client by ID
 export const getClientById = async (id) => {
   try {
@@ -197,7 +198,7 @@ export const getJanitorialAccounts = async () => {
 
 // --Work Order related API calls-- //
 
-// API call to get all Invoices
+// API call to get all Work Orders
 export const getWorkOrders = async () => {
   try {
     const response = await apiClient.get("/api/workorder/all");
@@ -221,7 +222,7 @@ export const getInvoices = async () => {
 
 // --Incident related API calls-- //
 
-// API call to get all Invoices
+// API call to get all EmployeeIncidents
 export const getEmployeeIncidents = async () => {
   try {
     const response = await apiClient.get("/api/employeeincident/all");
@@ -234,6 +235,18 @@ export const getEmployeeIncidents = async () => {
 export const getServiceIncidents = async () => {
   try {
     const response = await apiClient.get("/api/serviceincident/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// --Reports/Views related API calls-- //
+
+// API call to get all InvoiceDetailsView
+export const getInvoiceDetails = async (invoiceID) => {
+  try {
+    const response = await apiClient.get(`/report/invoicedetails/${invoiceID}`);
     return response.data;
   } catch (error) {
     throw error;

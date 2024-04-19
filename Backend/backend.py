@@ -728,4 +728,13 @@ def delServiceIncident():
     print("Attempting Deletion, ServiceIncidentID: '%s" % idToDelete)
     return executeQuery(connection, "DELETE FROM ServiceIncident WHERE ServiceIncidentID = %s" % idToDelete)
 
+# START OF REPORTS/VIEWS API ENDPOINTS #
+#Read InvoiceDetailsView
+@app.route('/report/invoicedetails/<invoiceID>', methods=['GET'])
+def invoiceDetails(invoiceID):
+    InvoiceDetails = executeReadQuery(connection, "SELECT * FROM InvoiceDetailsView WHERE InvoiceID = %s" % invoiceID)
+
+    print("Attempting Retrieval: SELECT * InvoiceDetailsView")
+    return jsonify(InvoiceDetails)
+
 app.run()

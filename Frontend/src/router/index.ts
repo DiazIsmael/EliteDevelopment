@@ -18,13 +18,14 @@ import ServicesView from '@/views/Services/ServicesView.vue'
 import JanitorialAccountsView from '@/views/JanitorialAccounts/JanitorialAccountsView.vue'
 import WorkOrdersView from '@/views/WorkOrders/WorkOrdersView.vue'
 import InvoicesView from '@/views/Invoices/InvoicesView.vue'
+import InvoiceDetailsView from '@/views/Invoices/InvoiceDetailsView.vue'
 import EmployeeIncidentsView from '@/views/Incidents/EmployeeIncidentsView.vue'
 import ServiceIncidentsView from '@/views/Incidents/ServiceIncidentsView.vue'
 
 const routes = [
   {
     path: '/',
-    name: 'glanceView',
+    name: 'GlanceView',
     component: GlanceView,
     meta: {
       title: 'Dashboard'
@@ -32,7 +33,7 @@ const routes = [
   },
   {
     path: '/calendar',
-    name: 'calendar',
+    name: 'Calendar',
     component: CalendarView,
     meta: {
       title: 'Calendar'
@@ -40,7 +41,7 @@ const routes = [
   },
   {
     path: '/employees',
-    name: 'employees',
+    name: 'Employees',
     component: EmployeesView,
     meta: {
       title: 'Employees'
@@ -48,7 +49,7 @@ const routes = [
   },
   {
     path: '/clients',
-    name: 'clients',
+    name: 'Clients',
     component: ClientsView,
     meta: {
       title: 'Clients'
@@ -56,7 +57,7 @@ const routes = [
   },
   {
     path: '/services',
-    name: 'services',
+    name: 'Services',
     component: ServicesView,
     meta: {
       title: 'Services'
@@ -64,7 +65,7 @@ const routes = [
   },
   {
     path: '/accounts',
-    name: 'accounts',
+    name: 'Accounts',
     component: JanitorialAccountsView,
     meta: {
       title: 'Janitorial Accounts'
@@ -72,7 +73,7 @@ const routes = [
   },
   {
     path: '/workorders',
-    name: 'workorders',
+    name: 'Workorders',
     component: WorkOrdersView,
     meta: {
       title: 'Work Orders'
@@ -80,15 +81,24 @@ const routes = [
   },
   {
     path: '/invoices',
-    name: 'invoices',
+    name: 'Invoices',
     component: InvoicesView,
     meta: {
       title: 'Invoices'
     }
   },
   {
+    path: '/invoicedetails/:invoiceID',
+    name: 'InvoiceDetails',
+    props: true,
+    component: InvoiceDetailsView,
+    meta: {
+      title: 'Invoice Details'
+    }
+  },
+  {
     path: '/employeeincidents',
-    name: 'employeeincidents',
+    name: 'Employeeincidents',
     component: EmployeeIncidentsView,
     meta: {
       title: 'Employee Incidents'
@@ -96,7 +106,7 @@ const routes = [
   },
   {
     path: '/serviceincidents',
-    name: 'serviceincidents',
+    name: 'Serviceincidents',
     component: ServiceIncidentsView,
     meta: {
       title: 'Service Incidents'
@@ -104,7 +114,7 @@ const routes = [
   },
   {
     path: '/profile',
-    name: 'profile',
+    name: 'Profile',
     component: ProfileView,
     meta: {
       title: 'Profile'
@@ -112,7 +122,7 @@ const routes = [
   },
   {
     path: '/forms/form-elements',
-    name: 'formElements',
+    name: 'FormElements',
     component: FormElementsView,
     meta: {
       title: 'Form Elements'
@@ -120,7 +130,7 @@ const routes = [
   },
   {
     path: '/forms/form-layout',
-    name: 'formLayout',
+    name: 'FormLayout',
     component: FormLayoutView,
     meta: {
       title: 'Form Layout'
@@ -128,7 +138,7 @@ const routes = [
   },
   {
     path: '/tables',
-    name: 'tables',
+    name: 'Tables',
     component: TablesView,
     meta: {
       title: 'Tables'
@@ -136,7 +146,7 @@ const routes = [
   },
   {
     path: '/settings',
-    name: 'settings',
+    name: 'Settings',
     component: SettingsView,
     meta: {
       title: 'Settings'
@@ -144,7 +154,7 @@ const routes = [
   },
   {
     path: '/charts/basic-chart',
-    name: 'basicChart',
+    name: 'BasicChart',
     component: BasicChartView,
     meta: {
       title: 'Basic Chart'
@@ -152,7 +162,7 @@ const routes = [
   },
   {
     path: '/ui-elements/alerts',
-    name: 'alerts',
+    name: 'Alerts',
     component: AlertsView,
     meta: {
       title: 'Alerts'
@@ -160,7 +170,7 @@ const routes = [
   },
   {
     path: '/ui-elements/buttons',
-    name: 'buttons',
+    name: 'Buttons',
     component: ButtonsView,
     meta: {
       title: 'Buttons'
@@ -168,7 +178,7 @@ const routes = [
   },
   {
     path: '/auth/signin',
-    name: 'signin',
+    name: 'Signin',
     component: SigninView,
     meta: {
       title: 'Signin'
@@ -176,7 +186,7 @@ const routes = [
   },
   {
     path: '/auth/signup',
-    name: 'signup',
+    name: 'Signup',
     component: SignupView,
     meta: {
       title: 'Signup'
