@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import ServiceIncidentsTable from '@/components/Tables/ServiceIncidentsTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Service Related Incidents')
+const pageTitle = ref('Service-Related Incidents')
 </script>
 
 <template>

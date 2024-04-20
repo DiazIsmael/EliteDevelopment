@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import EmployeeIncidentsTable from '@/components/Tables/EmployeeIncidentsTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Employee Related Incidents')
+const pageTitle = ref('Employee-Related Incidents')
 </script>
 
 <template>

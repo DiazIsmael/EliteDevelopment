@@ -30,7 +30,7 @@ onMounted(loadEmployeeIncidents)
 
 <template>
   <div class="rounded-sm border border-stroke bg-white px-5 pt-6 pb-2.5 shadow-default dark:border-strokedark dark:bg-boxdark sm:px-7.5 xl:pb-1">
-    <h4 class="mb-6 text-xl font-semibold text-black dark:text-white">Employee Incidents</h4>
+    <h4 class="mb-6 text-xl font-semibold text-black dark:text-white">Incidents</h4>
     <div class="flex flex-col">
       <div class="grid grid-cols-4 rounded-sm bg-gray-2 dark:bg-meta-4 sm:grid-cols-5">
         <div class="p-2.5 text-center xl:p-5">

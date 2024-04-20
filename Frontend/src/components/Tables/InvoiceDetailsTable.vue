@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, onMounted, watch } from 'vue'
+import { ref, onMounted } from 'vue'
 import { useRoute } from 'vue-router'
 import { getInvoiceDetails } from '@/api/api.js';
 
@@ -9,22 +9,31 @@ const invoicedetails = ref([
     InvoiceID: 0,
     ClientName: '',
     InvoiceNumber: 0,
+    WorkOrderID: '',
     WorkOrderDate: '',
     WorkOrderName: '',
     EmployeeName: '',
     WorkOrderDescription: '',
     WorkOrderFrequency: '',
-    WorkOrderPrice: 0
+    WorkOrderPrice: 0,
+    Breadcrumb: 'Loading...'
   }
 ])
 const isLoading = ref(true)
 const route = useRoute()
+const emit = defineEmits(['emitBreadcrumb'])
 
 // Method to fetch/GET invoice details table data from the backend API
 const loadInvoiceDetails = async (invoiceID) => {
   try {
     const response = await getInvoiceDetails(invoiceID)
     invoicedetails.value = response
+
+    if (invoicedetails.value[0].WorkOrderID != 'Total') {
+      invoicedetails.value[0].Breadcrumb = `${invoicedetails.value[0].ClientName} Invoice #${invoicedetails.value[1].InvoiceNumber}`;
+      emit('emitBreadcrumb', invoicedetails.value[0].Breadcrumb) // Emitting breadcrumb update event
+    }
+    
     isLoading.value = false
   } catch (err) {
     console.error("There was an error fetching the invoice details:", err)
@@ -36,13 +45,6 @@ const loadInvoiceDetails = async (invoiceID) => {
 onMounted(() => {
   loadInvoiceDetails(route.params.invoiceID)
 })
-
-// Watcher to react to changes in the route params (if the component is used in a way where the route can change without remounting)
-watch(() => route.params.invoiceID, (newInvoiceID) => {
-  if (newInvoiceID) {
-    loadInvoiceDetails(newInvoiceID)
-  }
-})
 </script>
 
 <template>
@@ -52,43 +54,36 @@ watch(() => route.params.invoiceID, (newInvoiceID) => {
     <div class="max-w-full overflow-x-auto">
       <table class="w-full table-auto">
         <thead>
-          <tr class="bg-gray-2 text-left dark:bg-meta-4">
-            <th class="py-4 px-4 font-medium text-black dark:text-white xl:pl-11">Client</th>
-            <th class="py-4 px-0 text-center font-medium text-black dark:text-white">Invoice No</th>
-            <th class="py-4 px-4 text-center font-medium text-black dark:text-white">Date</th>
-            <th class="py-4 px-4 text-center font-medium text-black dark:text-white">Name</th>
-            <th class="py-4 px-4 text-center font-medium text-black dark:text-white">Employee</th>
-            <th class="py-4 px-4 text-center font-medium text-black dark:text-white">Description</th>
-            <th class="py-4 px-4 text-center font-medium text-black dark:text-white">Frequency</th>
-            <th class="py-4 px-4 text-center font-medium text-black dark:text-white">Price</th>
+          <tr class="bg-gray-2 text-center dark:bg-meta-4">
+            <th class="hidden sm:block py-4 px-0 font-medium text-black dark:text-white">Work Order</th>
+            <th class="py-4 px-4 font-medium text-black dark:text-white">Date</th>
+            <th class="py-4 px-4 font-medium text-black dark:text-white">Name</th>
+            <th class="hidden sm:block py-4 px-4 font-medium text-black dark:text-white">Employee</th>
+            <th class="py-4 px-4 font-medium text-black dark:text-white">Description</th>
+            <th class="py-4 px-4 font-medium text-black dark:text-white">Price</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(workorder, index) in invoicedetails" :key="index">
-            <td class="py-5 px-4 pl-9 xl:pl-11">
-              <h5 v-if="workorder.ClientName != 'Total'" class="text-black dark:text-white">{{ workorder.ClientName }}</h5>
-              <h5 v-else class="font-bold text-black dark:text-white">{{ workorder.ClientName }}</h5>
+          <tr v-for="(workorder, index) in invoicedetails" :key="index" class="text-center">
+            <td class="hidden sm:block py-5 px-4">
+              <h5 v-if="workorder.WorkOrderID != 'Total'" class="text-black dark:text-white">{{ workorder.WorkOrderID }}</h5>
+              <h5 v-else class="font-bold text-black dark:text-white">{{ workorder.WorkOrderID }}</h5>
             </td>
-            <td class="text-center py-5 px-4">
-              <p class="text-black dark:text-white">{{ workorder.InvoiceNumber }}</p>
-            </td>
-            <td class="text-center py-5 px-4">
+            <td class="sm:px-4 py-5 px-1">
               <p class="text-black dark:text-white">{{ workorder.WorkOrderDate }}</p>
             </td>
-            <td class="text-center py-5 px-4">
+            <td class="sm:px-4 sm:text-center py-5 px-1">
               <p class="text-black dark:text-white">{{ workorder.WorkOrderName }}</p>
             </td>
-            <td class="text-center py-5 px-4">
+            <td class="hidden sm:block py-5 px-4">
               <p class="text-black dark:text-white">{{ workorder.EmployeeName }}</p>
             </td>
-            <td class="text-center py-5 px-4">
+            <td class="sm:px-4 py-5 px-1">
               <p class="text-black dark:text-white">{{ workorder.WorkOrderDescription }}</p>
             </td>
-            <td class="text-center py-5 px-4">
-              <p class="text-black dark:text-white">{{ workorder.WorkOrderFrequency }}</p>
-            </td>
-            <td class="text-center py-5 px-4">
-              <p class="text-black dark:text-white">{{ workorder.WorkOrderPrice }}</p>
+            <td class="sm:px-4 sm:text-center py-5 px-1">
+              <p v-if="workorder.WorkOrderID != 'Total'" class="text-meta-3">{{ workorder.WorkOrderPrice }}</p>
+              <p v-if="workorder.WorkOrderID == 'Total'" class="font-bold text-black dark:text-white">{{ workorder.WorkOrderPrice }}</p>
             </td>
           </tr>
         </tbody>

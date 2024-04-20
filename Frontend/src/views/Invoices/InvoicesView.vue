@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import InvoicesTable from '@/components/Tables/InvoicesTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Past Invoices')
+const pageTitle = ref('Past Invoices')
 </script>
 
 <template>

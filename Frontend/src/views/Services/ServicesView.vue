@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import ServicesTable from '@/components/Tables/ServicesTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Offered Services')
+const pageTitle = ref('Offered Services')
 </script>
 
 <template>

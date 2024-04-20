@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import ClientsTable from '@/components/Tables/ClientsTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Company Clients')
+const pageTitle = ref('Registered Clients')
 </script>
 
 <template>

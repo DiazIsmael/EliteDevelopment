@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import WorkOrdersTable from '@/components/Tables/WorkOrdersTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Inputted Work Orders')
+const pageTitle = ref('Past Work Orders')
 </script>
 
 <template>

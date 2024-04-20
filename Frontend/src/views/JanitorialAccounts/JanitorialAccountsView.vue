@@ -4,7 +4,7 @@ import BreadcrumbDefault from '@/components/Breadcrumbs/BreadcrumbDefault.vue'
 import JanitorialAccountsTable from '@/components/Tables/JanitorialAccountsTable.vue'
 import DefaultLayout from '@/layouts/DefaultLayout.vue'
 
-const pageTitle = ref('All Inputted Janitorial Accounts')
+const pageTitle = ref('Janitorial Accounts')
 </script>
 
 <template>

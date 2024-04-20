@@ -49,7 +49,7 @@ onMounted(loadJanitorialAccounts)
       <div class="text-center col-span-1 flex justify-center items-center">
         <p class="font-medium">Address</p>
       </div>
-      <div class="text-center col-span-1 flex justify-center items-center">
+      <div class="hidden text-center col-span-1 flex justify-center items-center sm:flex">
         <p class="font-medium">Frequency</p>
       </div>
       <div class="text-center col-span-1 flex justify-center items-center">
