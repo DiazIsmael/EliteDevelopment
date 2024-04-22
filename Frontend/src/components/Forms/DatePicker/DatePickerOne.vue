@@ -1,6 +1,17 @@
 <script setup lang="ts">
 import flatpickr from 'flatpickr'
-import { onMounted } from 'vue'
+import { ref, onMounted, watch } from 'vue'
+
+const props = defineProps({
+  modelValue: String,
+  required: {
+    type: Boolean,
+    default: false
+  }
+})
+const emit = defineEmits(['update:modelValue'])
+
+const date = ref(null)
 
 onMounted(() => {
   // Init flatpickr
@@ -8,7 +19,10 @@ onMounted(() => {
     mode: 'single',
     static: true,
     monthSelectorType: 'static',
-    dateFormat: 'M j, Y',
+    dateFormat: 'Y-m-d',
+    onChange: (selectedDates, dateStr) => {
+      emit('update:modelValue', dateStr);  // Emit the date string to the parent
+    },
     prevArrow:
       '<svg class="fill-current" width="7" height="11" viewBox="0 0 7 11"><path d="M5.4 10.8l1.4-1.4-4-4 4-4L5.4 0 0 5.4z" /></svg>',
     nextArrow:
@@ -19,11 +33,14 @@ onMounted(() => {
 
 <template>
   <div>
-    <label class="mb-3 block text-sm font-medium text-black dark:text-white"> Date picker </label>
+    <label class="mb-2.5 block text-black dark:text-white"> Date
+      <span v-if="required" class="text-meta-1">*</span>
+    </label>
     <div class="relative">
       <input
+        ref="date"
         class="datepicker w-full rounded border-[1.5px] border-stroke bg-transparent py-3 px-5 font-normal outline-none transition focus:border-primary active:border-primary dark:border-form-strokedark dark:bg-form-input dark:focus:border-primary"
-        placeholder="mm/dd/yyyy"
+        placeholder="Select a date"
         data-class="flatpickr-right"
       />
 

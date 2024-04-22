@@ -36,7 +36,7 @@ onMounted(loadServices)
         <p class="font-medium">Description</p>
       </div>
       <div class="text-center col-span-1 flex justify-center items-center">
-        <p class="font-medium">Service No</p>
+        <p class="font-medium">Service ID</p>
       </div>
     </div>
 

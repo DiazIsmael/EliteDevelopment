@@ -1,5 +1,8 @@
 import mysql.connector
 from mysql.connector import Error
+from credentials import Creds
+myCreds = Creds()
+auth = {'auth': False, 'authUser': myCreds.authUser, 'authPass': myCreds.authPass}
 
 def createConnection(hostname, username, password, dbname):
     connection = None
@@ -16,7 +19,8 @@ def createConnection(hostname, username, password, dbname):
     
     return connection
 
-def executeReadQuery(connection, query):
+def executeReadQuery(query):
+    connection = createConnection(myCreds.conString, myCreds.username, myCreds.password, myCreds.dbname)
     cursor = connection.cursor(dictionary=True)
     result = None
     try:
@@ -25,8 +29,12 @@ def executeReadQuery(connection, query):
         return result
     except Error as e:
         print(f"The error '{e}' occurred :(")
+    finally:
+        cursor.close()
+        connection.close()
 
-def executeQuery(connection, query):
+def executeQuery(query):
+    connection = createConnection(myCreds.conString, myCreds.username, myCreds.password, myCreds.dbname)
     cursor = connection.cursor()
     try:
         cursor.execute(query)
@@ -34,3 +42,6 @@ def executeQuery(connection, query):
         return ("Query successfully executed!")
     except Error as e:
         return f"(The error '{e}' has occurred :("
+    finally:
+        cursor.close()
+        connection.close()

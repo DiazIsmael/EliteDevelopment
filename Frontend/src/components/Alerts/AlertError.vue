@@ -20,10 +20,10 @@
       </svg>
     </div>
     <div class="w-full">
-      <h5 class="mb-3 font-bold text-[#B45454]">There were 1 errors with your submission</h5>
+      <h5 class="mb-3 font-bold text-[#B45454]">Nice Try...</h5>
       <ul>
         <li class="leading-relaxed text-[#CD5D5D]">
-          Lorem Ipsum is simply dummy text of the printing
+          That didn't quite work though. (Click to dismiss)
         </li>
       </ul>
     </div>

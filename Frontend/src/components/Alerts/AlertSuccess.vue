@@ -21,10 +21,10 @@
     </div>
     <div class="w-full">
       <h5 class="mb-3 text-lg font-bold text-black dark:text-[#34D399]">
-        Message Sent Successfully
+        Success!
       </h5>
       <p class="text-base leading-relaxed text-body">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+        Whatever it was that you were trying to do, worked? Nice. (Click to dismiss)
       </p>
     </div>
   </div>

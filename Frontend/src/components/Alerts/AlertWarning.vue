@@ -17,10 +17,9 @@
       </svg>
     </div>
     <div class="w-full">
-      <h5 class="mb-3 text-lg font-bold text-[#9D5425]">Attention needed</h5>
+      <h5 class="mb-3 text-lg font-bold text-[#9D5425]">Attention:</h5>
       <p class="leading-relaxed text-[#D0915C]">
-        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
-        been the industry's standard dummy text ever since the 1500s, when
+        Something happened and you should probably know about it. (Click to dismiss)
       </p>
     </div>
   </div>

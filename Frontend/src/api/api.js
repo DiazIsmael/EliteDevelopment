@@ -68,7 +68,7 @@ export function logoutUser() {
 
 // --Org related API calls-- //
 
-// API call to get org name
+// API call to GET org name
 export async function getOrgName() {
   const response = await apiClient.get(`/org`);
   return response.data;
@@ -76,7 +76,7 @@ export async function getOrgName() {
 
 // -- Employees related API calls-- //
 
-// API call to get all Employees
+// API call to GET all Employees
 export const getEmployees = async () => {
   try {
     const response = await apiClient.get("/api/employee/all");
@@ -86,15 +86,72 @@ export const getEmployees = async () => {
   }
 };
 
+// API call to GET all Employee Statuses
+export const getEmployeeStatus = async () => {
+  try {
+    const response = await apiClient.get("/api/employeestatus/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to POST new Employee
+export const createEmployee = async (newEmployee) => {
+  try {
+    const response = await apiClient.post("/api/employee/add", newEmployee);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 // --Clients related API calls-- //
 
-// API call to get all Clients
+// API call to GET all Clients
 export const getClients = async () => {
   try {
     const response = await apiClient.get("/api/client/all");
     return response.data;
   } catch (error) {
     throw error;
+  }
+};
+
+// API call to GET all Client Statuses
+export const getClientStatus = async () => {
+  try {
+    const response = await apiClient.get("/api/clientstatus/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to GET all Client Types
+export const getClientTypes = async () => {
+  try {
+    const response = await apiClient.get("/api/clienttype/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to POST new Client
+export const createClient = async (newClient) => {
+  const currentDate = new Date();
+  const formattedDate = currentDate.getFullYear() + '-' + 
+                        ('0' + (currentDate.getMonth() + 1)).slice(-2) + '-' + 
+                        ('0' + currentDate.getDate()).slice(-2);
+
+  newClient.AddedDate = formattedDate;
+
+  try {
+    const response = await apiClient.post("/api/client/add", newClient);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
   }
 };
 
@@ -130,16 +187,6 @@ export const searchClients = async (query) => {
   }
 };
 
-// API call to POST new client
-export const createClient = async (newClient) => {
-  try {
-    const response = await apiClient.post("/clients", newClient);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
 // API call to PUT update client
 export const updateClient = async (id, updatedClient) => {
   try {
@@ -163,18 +210,9 @@ export const deleteClientbyId = async (id) => {
   }
 };
 
-// API call to get events for dashboard
-export const getClientsByZipCode = async () => {
-  try {
-    const response = await apiClient.get("/clients/byzip");
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
 // --Service related API calls-- //
 
-// API call to get all Services
+// API call to GET all Services
 export const getServices = async () => {
   try {
     const response = await apiClient.get("/api/service/all");
@@ -184,9 +222,39 @@ export const getServices = async () => {
   }
 };
 
+// API call to POST new service
+export const createService = async (newService) => {
+  try {
+    const response = await apiClient.post("/api/service/add", newService);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to PUT update service
+export const updateService = async (id, updatedService) => {
+  try {
+    const response = await apiClient.put(`/services/update/${id}`, updatedService);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to DELETE service by ID
+export const deleteService = async (id) => {
+  try {
+    const response = await apiClient.delete(`/services/${id}`);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 // --Janitorial Account related API calls-- //
 
-// API call to get all Janitorial Accounts
+// API call to GET all Janitorial Accounts
 export const getJanitorialAccounts = async () => {
   try {
     const response = await apiClient.get("/api/janitorialaccount/all");
@@ -196,9 +264,29 @@ export const getJanitorialAccounts = async () => {
   }
 };
 
+// API call to GET all Client Statuses
+export const getAccountStatus = async () => {
+  try {
+    const response = await apiClient.get("/api/accountstatus/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to POST new Janitorial Account
+export const createJanitorialAccount = async (newAccount) => {
+  try {
+    const response = await apiClient.post("/api/janitorialaccount/add", newAccount);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 // --Work Order related API calls-- //
 
-// API call to get all Work Orders
+// API call to GET all Work Orders
 export const getWorkOrders = async () => {
   try {
     const response = await apiClient.get("/api/workorder/all");
@@ -208,9 +296,19 @@ export const getWorkOrders = async () => {
   }
 };
 
+// API call to POST new Work Order
+export const createWorkOrder = async (newWorkOrder) => {
+  try {
+    const response = await apiClient.post("/api/janitorialaccount/add", newWorkOrder);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 // --Invoices related API calls-- //
 
-// API call to get all Invoices
+// API call to GET all Invoices
 export const getInvoices = async () => {
   try {
     const response = await apiClient.get("/api/invoice/all");
@@ -222,16 +320,7 @@ export const getInvoices = async () => {
 
 // --Incident related API calls-- //
 
-// API call to get all EmployeeIncidents
-export const getEmployeeIncidents = async () => {
-  try {
-    const response = await apiClient.get("/api/employeeincident/all");
-    return response.data;
-  } catch (error) {
-    throw error;
-  }
-};
-
+// API call to GET all Service Incidents
 export const getServiceIncidents = async () => {
   try {
     const response = await apiClient.get("/api/serviceincident/all");
@@ -241,9 +330,48 @@ export const getServiceIncidents = async () => {
   }
 };
 
+export const getIncidentStatus = async () => {
+  try {
+    const response = await apiClient.get("/api/incidentstatus/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to GET all Employee Incidents
+export const getEmployeeIncidents = async () => {
+  try {
+    const response = await apiClient.get("/api/employeeincident/all");
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// API call to POST new Service Incident
+export const createServiceIncident = async (newIncident) => {
+  try {
+    const response = await apiClient.post("/api/serviceincident/add", newIncident);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
+// API call to POST new Service Incident
+export const createEmployeeIncident = async (newIncident) => {
+  try {
+    const response = await apiClient.post("/api/employeeincident/add", newIncident);
+    return response.data;
+  } catch (error) {
+    throw error.response.data;
+  }
+};
+
 // --Reports/Views related API calls-- //
 
-// API call to get all InvoiceDetailsView
+// API call to GET all InvoiceDetailsView
 export const getInvoiceDetails = async (invoiceID) => {
   try {
     const response = await apiClient.get(`/report/invoicedetails/${invoiceID}`);
@@ -291,7 +419,7 @@ export const deleteImage = async (clientID) => {
 
 // --API calls related to services (FROM TEMPLATE)-- //
 
-// API call to get all services for org
+// API call to GET all services for org
 export const getService = async () => {
   try {
     const response = await apiClient.get("/services/");
@@ -324,39 +452,6 @@ export const searchServices = async (query) => {
     const response = await apiClient.get("/services/search", {
       params: params,
     });
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to POST new service
-export const createService = async (newService) => {
-  try {
-    const response = await apiClient.post("/services", newService);
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to PUT update service
-export const updateService = async (id, updatedService) => {
-  try {
-    const response = await apiClient.put(
-      `/services/update/${id}`,
-      updatedService
-    );
-    return response.data;
-  } catch (error) {
-    throw error.response.data;
-  }
-};
-
-// API call to DELETE service by ID
-export const deleteService = async (id) => {
-  try {
-    const response = await apiClient.delete(`/services/${id}`);
     return response.data;
   } catch (error) {
     throw error.response.data;

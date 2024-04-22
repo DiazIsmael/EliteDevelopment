@@ -13,14 +13,21 @@ import TablesView from '@/views/TablesView.vue'
 import AlertsView from '@/views/UIElements/AlertsView.vue'
 import ButtonsView from '@/views/UIElements/ButtonsView.vue'
 import EmployeesView from '@/views/Employees/EmployeesView.vue'
+import NewEmployeeView from '@/views/Employees/NewEmployeeView.vue'
 import ClientsView from '@/views/Clients/ClientsView.vue'
+import NewClientView from '@/views/Clients/NewClientView.vue'
 import ServicesView from '@/views/Services/ServicesView.vue'
+import NewServiceView from '@/views/Services/NewServiceView.vue'
 import JanitorialAccountsView from '@/views/JanitorialAccounts/JanitorialAccountsView.vue'
+import NewAccountView from '@/views/JanitorialAccounts/NewAccountView.vue'
 import WorkOrdersView from '@/views/WorkOrders/WorkOrdersView.vue'
+import CreateWorkOrderView from '@/views/WorkOrders/CreateWorkOrderView.vue'
 import InvoicesView from '@/views/Invoices/InvoicesView.vue'
 import InvoiceDetailsView from '@/views/Invoices/InvoiceDetailsView.vue'
 import EmployeeIncidentsView from '@/views/Incidents/EmployeeIncidentsView.vue'
 import ServiceIncidentsView from '@/views/Incidents/ServiceIncidentsView.vue'
+import CreateServiceIncidentView from '@/views/Incidents/CreateServiceIncidentView.vue'
+import CreateEmployeeIncidentView from '@/views/Incidents/CreateEmployeeIncidentView.vue'
 
 const routes = [
   {
@@ -48,11 +55,27 @@ const routes = [
     }
   },
   {
+    path: '/newemployee',
+    name: 'NewEmployee',
+    component: NewEmployeeView,
+    meta: {
+      title: 'New Employee'
+    }
+  },
+  {
     path: '/clients',
     name: 'Clients',
     component: ClientsView,
     meta: {
       title: 'Clients'
+    }
+  },
+  {
+    path: '/newclient',
+    name: 'NewClient',
+    component: NewClientView,
+    meta: {
+      title: 'New Client'
     }
   },
   {
@@ -64,6 +87,14 @@ const routes = [
     }
   },
   {
+    path: '/newservice',
+    name: 'NewService',
+    component: NewServiceView,
+    meta: {
+      title: 'New Service'
+    }
+  },
+  {
     path: '/accounts',
     name: 'Accounts',
     component: JanitorialAccountsView,
@@ -72,11 +103,27 @@ const routes = [
     }
   },
   {
+    path: '/newaccount',
+    name: 'NewAccount',
+    component: NewAccountView,
+    meta: {
+      title: 'New Account'
+    }
+  },
+  {
     path: '/workorders',
-    name: 'Workorders',
+    name: 'WorkOrders',
     component: WorkOrdersView,
     meta: {
       title: 'Work Orders'
+    }
+  },
+  {
+    path: '/createworkorder',
+    name: 'CreateWorkOrder',
+    component: CreateWorkOrderView,
+    meta: {
+      title: 'Create Work Order'
     }
   },
   {
@@ -98,7 +145,7 @@ const routes = [
   },
   {
     path: '/employeeincidents',
-    name: 'Employeeincidents',
+    name: 'EmployeeIncidents',
     component: EmployeeIncidentsView,
     meta: {
       title: 'Employee Incidents'
@@ -106,10 +153,26 @@ const routes = [
   },
   {
     path: '/serviceincidents',
-    name: 'Serviceincidents',
+    name: 'ServiceIncidents',
     component: ServiceIncidentsView,
     meta: {
       title: 'Service Incidents'
+    }
+  },
+  {
+    path: '/createserviceincident',
+    name: 'CreateServiceIncident',
+    component: CreateServiceIncidentView,
+    meta: {
+      title: 'Create Service Incident'
+    }
+  },
+  {
+    path: '/createemployeeincident',
+    name: 'CreateEmployeeIncident',
+    component: CreateEmployeeIncidentView,
+    meta: {
+      title: 'Create Employee Incident'
     }
   },
   {

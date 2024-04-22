@@ -59,7 +59,8 @@ const menuGroups = ref([
                   <path d="M10.8283 9.05627H7.17207C4.16269 9.05627 1.71582 11.5313 1.71582 14.5406V16.875C1.71582 17.2125 1.99707 17.5219 2.3627 17.5219C2.72832 17.5219 3.00957 17.2407 3.00957 16.875V14.5406C3.00957 12.2344 4.89394 10.3219 7.22832 10.3219H10.8564C13.1627 10.3219 15.0752 12.2063 15.0752 14.5406V16.875C15.0752 17.2125 15.3564 17.5219 15.7221 17.5219C16.0877 17.5219 16.3689 17.2407 16.3689 16.875V14.5406C16.2846 11.5313 13.8377 9.05627 10.8283 9.05627Z" fill=""/>
                 </svg>`,
         label: 'Employees',
-        route: '/employees'
+        route: '#',
+        children: [{ label: 'Employees', route: '/employees' }, { label: 'New Employee', route: '/newemployee' }]
       },
       {
         icon: `<svg 
@@ -72,7 +73,8 @@ const menuGroups = ref([
                 <path stroke-linecap="round" stroke-linejoin="round" d="M18 18.72a9.094 9.094 0 0 0 3.741-.479 3 3 0 0 0-4.682-2.72m.94 3.198.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0 1 12 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 0 1 6 18.719m12 0a5.971 5.971 0 0 0-.941-3.197m0 0A5.995 5.995 0 0 0 12 12.75a5.995 5.995 0 0 0-5.058 2.772m0 0a3 3 0 0 0-4.681 2.72 8.986 8.986 0 0 0 3.74.477m.94-3.197a5.971 5.971 0 0 0-.94 3.197M15 6.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Zm6 3a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Zm-13.5 0a2.25 2.25 0 1 1-4.5 0 2.25 2.25 0 0 1 4.5 0Z" />
               </svg>`,
         label: 'Clients',
-        route: '/clients'
+        route: '#',
+        children: [{ label: 'Clients', route: '/clients' }, { label: 'New Client', route: '/newclient' }]
       },
       {
         icon: `<svg
@@ -85,7 +87,8 @@ const menuGroups = ref([
                   <path stroke-linecap="round" stroke-linejoin="round" d="M9.813 15.904 9 18.75l-.813-2.846a4.5 4.5 0 0 0-3.09-3.09L2.25 12l2.846-.813a4.5 4.5 0 0 0 3.09-3.09L9 5.25l.813 2.846a4.5 4.5 0 0 0 3.09 3.09L15.75 12l-2.846.813a4.5 4.5 0 0 0-3.09 3.09ZM18.259 8.715 18 9.75l-.259-1.035a3.375 3.375 0 0 0-2.455-2.456L14.25 6l1.036-.259a3.375 3.375 0 0 0 2.455-2.456L18 2.25l.259 1.035a3.375 3.375 0 0 0 2.456 2.456L21.75 6l-1.035.259a3.375 3.375 0 0 0-2.456 2.456ZM16.894 20.567 16.5 21.75l-.394-1.183a2.25 2.25 0 0 0-1.423-1.423L13.5 18.75l1.183-.394a2.25 2.25 0 0 0 1.423-1.423l.394-1.183.394 1.183a2.25 2.25 0 0 0 1.423 1.423l1.183.394-1.183.394a2.25 2.25 0 0 0-1.423 1.423Z" />
                 </svg>`,
         label: 'Services',
-        route: '/services'
+        route: '#',
+        children: [{ label: 'Services', route: '/services' }, { label: 'New Service', route: '/newservice' }]
       },
       {
         icon: `<svg xmlns="http://www.w3.org/2000/svg"
@@ -99,7 +102,8 @@ const menuGroups = ref([
                 <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 21h19.5m-18-18v18m10.5-18v18m6-13.5V21M6.75 6.75h.75m-.75 3h.75m-.75 3h.75m3-6h.75m-.75 3h.75m-.75 3h.75M6.75 21v-3.375c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21M3 3h12m-.75 4.5H21m-3.75 3.75h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Zm0 3h.008v.008h-.008v-.008Z" />
               </svg>`,
         label: 'Janitorial Accounts',
-        route: '/accounts'
+        route: '#',
+        children: [{ label: 'Accounts', route: '/accounts' }, { label: 'New Account', route: '/newaccount' }]
       },
       {
         icon: `<svg
@@ -121,7 +125,7 @@ const menuGroups = ref([
               </svg>`,
         label: 'Work Orders',
         route: '#',
-        children: [{ label: 'Work Orders', route: '/workorders' }]
+        children: [{ label: 'Work Orders', route: '/workorders' }, { label: 'Create Work Order', route: '/createworkorder' }]
       },
       {
         icon: `<svg
@@ -154,7 +158,7 @@ const menuGroups = ref([
                 </svg>`,
         label: 'Incidents',
         route: '#',
-        children: [{ label: 'Service Incidents', route: '/serviceincidents' }, { label: 'Employee Incidents', route: '/employeeincidents' }]
+        children: [{ label: 'Service Incidents', route: '/serviceincidents' }, { label: 'Employee Incidents', route: '/employeeincidents' }, { label: 'Create Service Incident', route: '/createserviceincident' }, { label: 'Create Employee Incident', route: '/createemployeeincident'}]
       }
     ]
   },

@@ -4,23 +4,20 @@ from flask import jsonify
 from flask import request
 from flask import make_response
 from flask_cors import CORS, cross_origin
-from sql import createConnection
 from sql import executeReadQuery
 from sql import executeQuery
 from credentials import Creds
 import hashlib
 import datetime
 
+#Initializing credentials for use in APIs
+myCreds = Creds()
+auth = {'auth': False, 'authUser': myCreds.authUser, 'authPass': myCreds.authPass}
 
 #Initial setup for Flask
 app = Flask(__name__) #sets up the application... (somehow)
 app.config['DEBUG'] = True
 CORS(app) #Cross Origin Resource Sharing
-
-#Initializing MySQL/AWS database connection for APIs
-myCreds = Creds()
-connection = createConnection(myCreds.conString, myCreds.username, myCreds.password, myCreds.dbname)
-auth = {'auth': False, 'authUser': myCreds.authUser, 'authPass': myCreds.authPass}
 
 #home/login API route
 @app.route('/api/login', methods=['GET'])
@@ -46,12 +43,13 @@ def addAccountStatus():
     query = f"INSERT INTO AccountStatus ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read AccountStatus
 @app.route('/api/accountstatus/all', methods=['GET'])
+@cross_origin()
 def allAccountStatuses():
-    AccountStatuses = executeReadQuery(connection, "SELECT * FROM AccountStatus")
+    AccountStatuses = executeReadQuery("SELECT * FROM AccountStatus")
 
     print("Attempting Retrieval: SELECT * AccountStatus")
     return jsonify(AccountStatuses)
@@ -69,7 +67,7 @@ def updAccountStatus():
     query = "UPDATE AccountStatus SET " + ', '.join(queryFields) + f" WHERE StatusCode = {StatusCode}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete AccountStatus
 @app.route('/api/accountstatus/delete', methods=['DELETE'])
@@ -78,7 +76,7 @@ def delAccountStatus():
     idToDelete = requestData['StatusCode']
 
     print("Attempting Deletion, Acoount StatusCode: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM AccountStatus WHERE StatusCode = %s" % idToDelete)
+    return executeQuery("DELETE FROM AccountStatus WHERE StatusCode = %s" % idToDelete)
 
 
 #Create ClientStatus
@@ -92,12 +90,13 @@ def addClientStatus():
     query = f"INSERT INTO ClientStatus ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read ClientStatus
 @app.route('/api/clientstatus/all', methods=['GET'])
+@cross_origin()
 def allClientStatuses():
-    ClientStatuses = executeReadQuery(connection, "SELECT * FROM ClientStatus")
+    ClientStatuses = executeReadQuery("SELECT * FROM ClientStatus")
 
     print("Attempting Retrieval: SELECT * ClientStatus")
     return jsonify(ClientStatuses)
@@ -115,7 +114,7 @@ def updClientStatus():
     query = "UPDATE ClientStatus SET " + ', '.join(queryFields) + f" WHERE StatusCode = {StatusCode}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete ClientStatus
 @app.route('/api/clientstatus/delete', methods=['DELETE'])
@@ -124,7 +123,7 @@ def delClientStatus():
     idToDelete = requestData['StatusCode']
 
     print("Attempting Deletion, Client StatusCode: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM ClientStatus WHERE StatusCode = %s" % idToDelete)
+    return executeQuery("DELETE FROM ClientStatus WHERE StatusCode = %s" % idToDelete)
 
 
 #Create ClientType
@@ -138,12 +137,13 @@ def addClientType():
     query = f"INSERT INTO ClientType ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read ClientType
 @app.route('/api/clienttype/all', methods=['GET'])
+@cross_origin()
 def allClientTypes():
-    ClientTypes = executeReadQuery(connection, "SELECT * FROM ClientType")
+    ClientTypes = executeReadQuery("SELECT * FROM ClientType")
 
     print("Attempting Retrieval: SELECT * ClientType")
     return jsonify(ClientTypes)
@@ -161,7 +161,7 @@ def updClientType():
     query = "UPDATE ClientType SET " + ', '.join(queryFields) + f" WHERE ClientCode = {StatusCode}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete ClientType
 @app.route('/api/clienttype/delete', methods=['DELETE'])
@@ -170,7 +170,7 @@ def delClientType():
     idToDelete = requestData['ClientCode']
 
     print("Attempting Deletion, ClientType ClientCode: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM ClientType WHERE ClientCode = %s" % idToDelete)
+    return executeQuery("DELETE FROM ClientType WHERE ClientCode = %s" % idToDelete)
 
 
 #Create EmployeeStatus
@@ -184,12 +184,13 @@ def addEmployeeStatus():
     query = f"INSERT INTO EmployeeStatus ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read EmployeeStatus
 @app.route('/api/employeestatus/all', methods=['GET'])
+@cross_origin()
 def allEmployeeStatuses():
-    EmployeeStatuses = executeReadQuery(connection, "SELECT * FROM EmployeeStatus")
+    EmployeeStatuses = executeReadQuery("SELECT * FROM EmployeeStatus")
 
     print("Attempting Retrieval: SELECT * EmployeeStatus")
     return jsonify(EmployeeStatuses)
@@ -207,7 +208,7 @@ def updEmployeeStatus():
     query = "UPDATE EmployeeStatus SET " + ', '.join(queryFields) + f" WHERE StatusCode = {StatusCode}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete EmployeeStatus
 @app.route('/api/employeestatus/delete', methods=['DELETE'])
@@ -216,7 +217,7 @@ def delEmployeeStatus():
     idToDelete = requestData['StatusCode']
 
     print("Attempting Deletion, Client StatusCode: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM EmployeeStatus WHERE StatusCode = %s" % idToDelete)
+    return executeQuery("DELETE FROM EmployeeStatus WHERE StatusCode = %s" % idToDelete)
 
 
 #Create IncidentStatus
@@ -230,12 +231,13 @@ def addIncidentStatus():
     query = f"INSERT INTO IncidentStatus ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read IncidentStatus
 @app.route('/api/incidentstatus/all', methods=['GET'])
+@cross_origin()
 def allIncidentStatuses():
-    IncidentStatuses = executeReadQuery(connection, "SELECT * FROM IncidentStatus")
+    IncidentStatuses = executeReadQuery("SELECT * FROM IncidentStatus")
 
     print("Attempting Retrieval: SELECT * IncidentStatus")
     return jsonify(IncidentStatuses)
@@ -253,7 +255,7 @@ def updIncidentStatus():
     query = "UPDATE IncidentStatus SET " + ', '.join(queryFields) + f" WHERE StatusCode = {StatusCode}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete IncidentStatus
 @app.route('/api/incidentstatus/delete', methods=['DELETE'])
@@ -262,7 +264,7 @@ def delIncidentStatus():
     idToDelete = requestData['StatusCode']
 
     print("Attempting Deletion, Client StatusCode: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM IncidentStatus WHERE StatusCode = %s" % idToDelete)
+    return executeQuery("DELETE FROM IncidentStatus WHERE StatusCode = %s" % idToDelete)
 
 
 #Create InvoiceStatus
@@ -276,12 +278,13 @@ def addInvoiceStatus():
     query = f"INSERT INTO InvoiceStatus ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read InvoiceStatus
 @app.route('/api/invoicestatus/all', methods=['GET'])
+@cross_origin()
 def allInvoiceStatuses():
-    InvoiceStatuses = executeReadQuery(connection, "SELECT * FROM InvoiceStatus")
+    InvoiceStatuses = executeReadQuery("SELECT * FROM InvoiceStatus")
 
     print("Attempting Retrieval: SELECT * InvoiceStatus")
     return jsonify(InvoiceStatuses)
@@ -299,7 +302,7 @@ def updInvoiceStatus():
     query = "UPDATE InvoiceStatus SET " + ', '.join(queryFields) + f" WHERE StatusCode = {StatusCode}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete InvoiceStatus
 @app.route('/api/invoicestatus/delete', methods=['DELETE'])
@@ -308,7 +311,7 @@ def delInvoiceStatus():
     idToDelete = requestData['StatusCode']
 
     print("Attempting Deletion, Client StatusCode: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM InvoiceStatus WHERE StatusCode = %s" % idToDelete)
+    return executeQuery("DELETE FROM InvoiceStatus WHERE StatusCode = %s" % idToDelete)
 
 
 # START OF WAVE 2 TABLES CRUD API ENDPOINTS #
@@ -323,12 +326,13 @@ def addEmployee():
     query = f"INSERT INTO Employee ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read Employee
 @app.route('/api/employee/all', methods=['GET'])
+@cross_origin()
 def allEmployees():
-    Employees = executeReadQuery(connection, "SELECT * FROM Employee")
+    Employees = executeReadQuery("SELECT * FROM Employee")
 
     print("Attempting Retrieval: SELECT * Employee")
     return jsonify(Employees)
@@ -346,7 +350,7 @@ def updEmployee():
     query = "UPDATE Employee SET " + ', '.join(queryFields) + f" WHERE EmployeeID = {EmployeeID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete Employee
 @app.route('/api/employee/delete', methods=['DELETE'])
@@ -355,7 +359,7 @@ def delEmployee():
     idToDelete = requestData['EmployeeID']
 
     print("Attempting Deletion, EmployeeID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM Employee WHERE EmployeeID = %s" % idToDelete)
+    return executeQuery("DELETE FROM Employee WHERE EmployeeID = %s" % idToDelete)
 
 
 #Create Client
@@ -369,12 +373,13 @@ def addClient():
     query = f"INSERT INTO Client ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read Client
 @app.route('/api/client/all', methods=['GET'])
+@cross_origin()
 def allClients():
-    Clients = executeReadQuery(connection, "SELECT * FROM Client")
+    Clients = executeReadQuery("SELECT * FROM Client")
 
     print("Attempting Retrieval: SELECT * Client")
     return jsonify(Clients)
@@ -392,7 +397,7 @@ def updClient():
     query = "UPDATE Client SET " + ', '.join(queryFields) + f" WHERE ClientID = {ClientID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete Client
 @app.route('/api/client/delete', methods=['DELETE'])
@@ -401,7 +406,7 @@ def delClient():
     idToDelete = requestData['ClientID']
 
     print("Attempting Deletion, ClientID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM Client WHERE ClientID = %s" % idToDelete)
+    return executeQuery("DELETE FROM Client WHERE ClientID = %s" % idToDelete)
 
 
 #Create Service
@@ -415,13 +420,13 @@ def addService():
     query = f"INSERT INTO Service ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read Service
 @app.route('/api/service/all', methods=['GET'])
+@cross_origin()
 def allServices():
-    Services = executeReadQuery(connection, "SELECT * FROM Service")
-
+    Services = executeReadQuery("SELECT * FROM Service")
     print("Attempting Retrieval: SELECT * Service")
     return jsonify(Services)
 
@@ -438,7 +443,7 @@ def updService():
     query = "UPDATE Service SET " + ', '.join(queryFields) + f" WHERE ServiceID = {ServiceID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete Service
 @app.route('/api/service/delete', methods=['DELETE'])
@@ -447,7 +452,7 @@ def delService():
     idToDelete = requestData['ServiceID']
 
     print("Attempting Deletion, ServiceID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM Service WHERE ServiceID = %s" % idToDelete)# START OF WAVE 2 TABLES #
+    return executeQuery("DELETE FROM Service WHERE ServiceID = %s" % idToDelete)# START OF WAVE 2 TABLES #
 
 
 # START OF WAVE 3 TABLES CRUD API ENDPOINTS #
@@ -462,12 +467,12 @@ def addEmployeeIncident():
     query = f"INSERT INTO EmployeeIncident ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read EmployeeIncident
 @app.route('/api/employeeincident/all', methods=['GET'])
 def allEmployeeIncidents():
-    EmployeeIncidents = executeReadQuery(connection, "SELECT * FROM EmployeeIncident")
+    EmployeeIncidents = executeReadQuery("SELECT * FROM EmployeeIncident")
 
     print("Attempting Retrieval: SELECT * EmployeeIncident")
     return jsonify(EmployeeIncidents)
@@ -485,7 +490,7 @@ def updEmployeeIncident():
     query = "UPDATE EmployeeIncident SET " + ', '.join(queryFields) + f" WHERE EmployeeIncidentID = {EmployeeIncidentID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete EmployeeIncident
 @app.route('/api/EmployeeIncident/delete', methods=['DELETE'])
@@ -494,7 +499,7 @@ def delEmployeeIncident():
     idToDelete = requestData['EmployeeIncidentID']
 
     print("Attempting Deletion, EmployeeIncidentID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM EmployeeIncident WHERE EmployeeIncidentID = %s" % idToDelete)
+    return executeQuery("DELETE FROM EmployeeIncident WHERE EmployeeIncidentID = %s" % idToDelete)
 
 
 #Create Invoice
@@ -508,12 +513,13 @@ def addInvoice():
     query = f"INSERT INTO Invoice ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read Invoice
 @app.route('/api/invoice/all', methods=['GET'])
+@cross_origin()
 def allInvoices():
-    Invoices = executeReadQuery(connection, "SELECT * FROM Invoice")
+    Invoices = executeReadQuery("SELECT * FROM Invoice")
 
     print("Attempting Retrieval: SELECT * Invoice")
     return jsonify(Invoices)
@@ -531,7 +537,7 @@ def updInvoice():
     query = "UPDATE Invoice SET " + ', '.join(queryFields) + f" WHERE InvoiceID = {InvoiceID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete Invoice
 @app.route('/api/invoice/delete', methods=['DELETE'])
@@ -540,7 +546,7 @@ def delInvoice():
     idToDelete = requestData['InvoiceID']
 
     print("Attempting Deletion, InvoiceID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM Invoice WHERE InvoiceID = %s" % idToDelete)
+    return executeQuery("DELETE FROM Invoice WHERE InvoiceID = %s" % idToDelete)
 
 
 #Create JanitorialAccount
@@ -554,12 +560,13 @@ def addJanitorialAccount():
     query = f"INSERT INTO JanitorialAccount ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read JanitorialAccount
 @app.route('/api/janitorialaccount/all', methods=['GET'])
+@cross_origin()
 def allJanitorialAccounts():
-    JanitorialAccounts = executeReadQuery(connection, "SELECT * FROM JanitorialAccount")
+    JanitorialAccounts = executeReadQuery("SELECT * FROM JanitorialAccount")
 
     print("Attempting Retrieval: SELECT * JanitorialAccount")
     return jsonify(JanitorialAccounts)
@@ -577,7 +584,7 @@ def updJanitorialAccount():
     query = "UPDATE JanitorialAccount SET " + ', '.join(queryFields) + f" WHERE AccountID = {JanitorialAccountID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete JanitorialAccount
 @app.route('/api/janitorialaccount/delete', methods=['DELETE'])
@@ -586,7 +593,7 @@ def delJanitorialAccount():
     idToDelete = requestData['AccountID']
 
     print("Attempting Deletion, AccountID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM JanitorialAccount WHERE AccountID = %s" % idToDelete)
+    return executeQuery("DELETE FROM JanitorialAccount WHERE AccountID = %s" % idToDelete)
 
 
 # START OF WAVE 4 TABLES CRUD API ENDPOINTS #
@@ -601,12 +608,13 @@ def addEmployeeAccount():
     query = f"INSERT INTO EmployeeAccount ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read EmployeeAccount
 @app.route('/api/employeeaccount/all', methods=['GET'])
+@cross_origin()
 def allEmployeeAccounts():
-    EmployeeAccounts = executeReadQuery(connection, "SELECT * FROM EmployeeAccount")
+    EmployeeAccounts = executeReadQuery("SELECT * FROM EmployeeAccount")
 
     print("Attempting Retrieval: SELECT * EmployeeAccount")
     return jsonify(EmployeeAccounts)
@@ -624,7 +632,7 @@ def updEmployeeAccount():
     query = "UPDATE EmployeeAccount SET " + ', '.join(queryFields) + f" WHERE EmployeeAccountID = {EmployeeAccountID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete EmployeeAccount
 @app.route('/api/employeeaccount/delete', methods=['DELETE'])
@@ -633,7 +641,7 @@ def delEmployeeAccount():
     idToDelete = requestData['EmployeeAccountID']
 
     print("Attempting Deletion, EmployeeAccountID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM EmployeeAccount WHERE EmployeeAccountID = %s" % idToDelete)
+    return executeQuery("DELETE FROM EmployeeAccount WHERE EmployeeAccountID = %s" % idToDelete)
 
 
 #Create WorkOrder
@@ -647,12 +655,13 @@ def addWorkOrder():
     query = f"INSERT INTO WorkOrder ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read WorkOrder
 @app.route('/api/workorder/all', methods=['GET'])
+@cross_origin()
 def allWorkOrders():
-    WorkOrders = executeReadQuery(connection, "SELECT * FROM WorkOrder")
+    WorkOrders = executeReadQuery("SELECT * FROM WorkOrder")
 
     print("Attempting Retrieval: SELECT * WorkOrder")
     return jsonify(WorkOrders)
@@ -670,7 +679,7 @@ def updWorkOrder():
     query = "UPDATE WorkOrder SET " + ', '.join(queryFields) + f" WHERE WorkOrderID = {WorkOrderID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete WorkOrder
 @app.route('/api/workorder/delete', methods=['DELETE'])
@@ -679,7 +688,7 @@ def delWorkOrder():
     idToDelete = requestData['WorkOrderID']
 
     print("Attempting Deletion, WorkOrderID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM WorkOrder WHERE WorkOrderID = %s" % idToDelete)
+    return executeQuery("DELETE FROM WorkOrder WHERE WorkOrderID = %s" % idToDelete)
 
 
 # START OF WAVE 5 (&Beyond!) TABLES CRUD API ENDPOINTS #
@@ -694,12 +703,12 @@ def addServiceIncident():
     query = f"INSERT INTO ServiceIncident ({keys}) VALUES ({values})"
 
     print(f"Attempting Query: {query}")
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Read ServiceIncident
 @app.route('/api/serviceincident/all', methods=['GET'])
 def allServiceIncidents():
-    ServiceIncidents = executeReadQuery(connection, "SELECT * FROM ServiceIncident")
+    ServiceIncidents = executeReadQuery("SELECT * FROM ServiceIncident")
 
     print("Attempting Retrieval: SELECT * ServiceIncident")
     return jsonify(ServiceIncidents)
@@ -717,7 +726,7 @@ def updServiceIncident():
     query = "UPDATE ServiceIncident SET " + ', '.join(queryFields) + f" WHERE ServiceIncidentID = {ServiceIncidentID}"
 
     print("Attempting Query: '%s" % query)
-    return executeQuery(connection, query)
+    return executeQuery(query)
 
 #Delete ServiceIncident
 @app.route('/api/serviceincident/delete', methods=['DELETE'])
@@ -726,13 +735,16 @@ def delServiceIncident():
     idToDelete = requestData['ServiceIncidentID']
 
     print("Attempting Deletion, ServiceIncidentID: '%s" % idToDelete)
-    return executeQuery(connection, "DELETE FROM ServiceIncident WHERE ServiceIncidentID = %s" % idToDelete)
+    return executeQuery("DELETE FROM ServiceIncident WHERE ServiceIncidentID = %s" % idToDelete)
 
 # START OF REPORTS/VIEWS API ENDPOINTS #
 #Read InvoiceDetailsView
 @app.route('/report/invoicedetails/<invoiceID>', methods=['GET'])
 def invoiceDetails(invoiceID):
-    InvoiceDetails = executeReadQuery(connection, "SELECT * FROM InvoiceDetailsView WHERE InvoiceID = %s" % invoiceID)
+    if invoiceID != None:
+        InvoiceDetails = executeReadQuery("SELECT * FROM InvoiceDetailsView WHERE InvoiceID = %s" % invoiceID)
+    else:
+        InvoiceDetails = executeReadQuery("SELECT * FROM InvoiceDetailsView WHERE WorkOrderID != 'Total'" )
 
     print("Attempting Retrieval: SELECT * InvoiceDetailsView")
     return jsonify(InvoiceDetails)
